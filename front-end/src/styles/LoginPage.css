@@ -1,0 +1,66 @@
+/* 전체 랩 */
+.login-wrap {
+  min-height: 100vh;
+  background: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+/* 카드 */
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+  padding: 24px;
+}
+
+/* 로고 */
+.login-logo {
+  width: 56px; height: 56px;
+  border-radius: 12px;
+  margin: 0 auto 8px;
+  display:flex; align-items:center; justify-content:center;
+  background:#ff9f45; color:#fff; font-size:28px;
+}
+
+/* 타이틀 */
+.login-title { text-align:center; font-size:22px; font-weight:800; margin:4px 0; }
+.login-subtitle { text-align:center; color:#6b7280; margin:4px 0 16px; }
+
+/* 라벨/인풋 */
+.login-label { display:block; font-size:13px; margin:10px 0 6px; }
+.login-input {
+  width:100%; padding:10px 12px; border-radius:10px;
+  border:1px solid #e5e7eb; outline:none; font-size:14px;
+}
+.login-input:focus { box-shadow:0 0 0 2px rgba(16,185,129,.3); border-color:#10b981; }
+
+/* 에러 */
+.login-error { color:#dc2626; font-size:13px; margin-top:8px; }
+
+/* 버튼 */
+.login-btn-primary {
+  width:100%; margin-top:12px; padding:10px 12px; border-radius:10px;
+  border:none; background:#10b981; color:#fff; font-weight:700; cursor:pointer;
+}
+.login-btn-secondary {
+  width:100%; margin-top:8px; padding:10px 12px; border-radius:10px;
+  border:1px solid #e5e7eb; background:#fff; font-weight:700; cursor:pointer;
+}
+
+/* 데모 박스 */
+.login-demo { margin-top:16px; background:#f3f4f6; border-radius:12px; padding:12px; }
+.login-demo p { margin:4px 0; color:#374151; font-size:14px; }
+.login-demo .title { margin:0; font-weight:600; }
+
+/* 푸터 */
+.login-footer { margin-top:14px; text-align:center; font-size:12px; color:#9ca3af; }
+
+/* 반응형 */
+@media (max-width: 380px) {
+  .login-card { padding: 18px; }
+}
