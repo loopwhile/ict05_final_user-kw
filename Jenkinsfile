@@ -4,6 +4,11 @@ pipeline {
     // Run on any available agent
     agent any
 
+    tools {
+        // Use the 'docker' tool configured in Jenkins Global Tool Configuration
+        docker 'docker'
+    }
+
     // Environment variables used throughout the pipeline
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')
