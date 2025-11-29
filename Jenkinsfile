@@ -6,7 +6,7 @@ pipeline {
 
     tools {
         // Use the 'docker' tool configured in Jenkins Global Tool Configuration
-        docker 'docker'
+        dockerTool 'docker'
     }
 
     // Environment variables used throughout the pipeline
