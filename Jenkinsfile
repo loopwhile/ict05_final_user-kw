@@ -30,14 +30,29 @@ pipeline {
         // Stage 2: Build and push the Spring Boot backend image
         stage('Build & Push User Backend') {
             steps {
-                script {
-                    echo "Building User Backend Docker image..."
-                    // Assumes the Dockerfile for the backend is in the project root
-                    def customImage = docker.build(USER_BACKEND_IMAGE, ".")
-                    
-                    echo "Pushing User Backend image to Docker Hub..."
-                    docker.withRegistry('https://registry.hub.docker.com', DOCKERHUB_CREDENTIALS) {
-                        customImage.push("latest")
+                // Use withCredentials to access the secret file
+                withCredentials([file(credentialsId: 'firebase-admin-key', variable: 'FIREBASE_ADMIN_KEY_FILE')]) {
+                    script {
+                        // Use a try-finally block to ensure the secret file is cleaned up
+                        try {
+                            echo "Preparing secret file for Docker build..."
+                            // Create the directory and copy the secret file to the location expected by the Dockerfile
+                            sh 'mkdir -p fcm-secret'
+                            sh 'cp $FIREBASE_ADMIN_KEY_FILE fcm-secret/firebase-admin.json'
+
+                            echo "Building User Backend Docker image..."
+                            // Assumes the Dockerfile for the backend is in the project root
+                            def customImage = docker.build(USER_BACKEND_IMAGE, ".")
+                            
+                            echo "Pushing User Backend image to Docker Hub..."
+                            docker.withRegistry('https://registry.hub.docker.com', DOCKERHUB_CREDENTIALS) {
+                                customImage.push("latest")
+                            }
+                        } finally {
+                            // Clean up the secret file and directory from the workspace
+                            echo "Cleaning up secret file..."
+                            sh 'rm -rf fcm-secret'
+                        }
                     }
                 }
             }
