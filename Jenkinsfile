@@ -11,11 +11,11 @@ pipeline {
 
     // Environment variables used throughout the pipeline
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')
-        DOCKERHUB_USERNAME    = 'loopwhile' // As per DevOps.md
-        USER_BACKEND_IMAGE    = "${DOCKERHUB_USERNAME}/ict05-final-user-backend"
-        USER_PDF_IMAGE        = "${DOCKERHUB_USERNAME}/ict05-final-user-pdf"
-        USER_FRONTEND_IMAGE   = "${DOCKERHUB_USERNAME}/ict05-final-user-frontend"
+        DOCKERHUB_CREDENTIALS_ID = 'dockerhub-credentials' // Corrected
+        DOCKERHUB_USERNAME       = 'loopwhile' // As per DevOps.md
+        USER_BACKEND_IMAGE       = "${DOCKERHUB_USERNAME}/ict05-final-user-backend"
+        USER_PDF_IMAGE           = "${DOCKERHUB_USERNAME}/ict05-final-user-pdf"
+        USER_FRONTEND_IMAGE      = "${DOCKERHUB_USERNAME}/ict05-final-user-frontend"
     }
 
     stages {
@@ -45,7 +45,7 @@ pipeline {
                             def customImage = docker.build(USER_BACKEND_IMAGE, ".")
                             
                             echo "Pushing User Backend image to Docker Hub..."
-                            docker.withRegistry('https://registry.hub.docker.com', DOCKERHUB_CREDENTIALS) {
+                            docker.withRegistry('https://registry.hub.docker.com', DOCKERHUB_CREDENTIALS_ID) { // Corrected
                                 customImage.push("latest")
                             }
                         } finally {
@@ -67,7 +67,7 @@ pipeline {
                     def customImage = docker.build(USER_PDF_IMAGE, "python-pdf-download")
                     
                     echo "Pushing User PDF Service image to Docker Hub..."
-                    docker.withRegistry('https://registry.hub.docker.com', DOCKERHUB_CREDENTIALS) {
+                    docker.withRegistry('https://registry.hub.docker.com', DOCKERHUB_CREDENTIALS_ID) { // Corrected
                         customImage.push("latest")
                     }
                 }
@@ -83,7 +83,7 @@ pipeline {
                     def customImage = docker.build(USER_FRONTEND_IMAGE, "front-end")
                     
                     echo "Pushing User Frontend image to Docker Hub..."
-                    docker.withRegistry('https://registry.hub.docker.com', DOCKERHUB_CREDENTIALS) {
+                    docker.withRegistry('https://registry.hub.docker.com', DOCKERHUB_CREDENTIALS_ID) { // Corrected
                         customImage.push("latest")
                     }
                 }
