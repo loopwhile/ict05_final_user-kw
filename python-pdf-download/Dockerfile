@@ -12,6 +12,8 @@ RUN useradd --create-home appuser
 USER appuser
 WORKDIR /home/appuser/app
 
+ENV PATH="/home/appuser/.local/bin:$PATH"
+
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
