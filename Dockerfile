@@ -17,7 +17,7 @@ RUN ./gradlew dependencies
 COPY src ./src
 
 # 스프링 부트 jar 빌드 (테스트 제외)
-RUN ./gradlew clean bootJar -x test
+RUN ./gradlew clean bootJar -x test --no-daemon
 
 # 2단계: 실행용 이미지
 FROM eclipse-temurin:17-jre
