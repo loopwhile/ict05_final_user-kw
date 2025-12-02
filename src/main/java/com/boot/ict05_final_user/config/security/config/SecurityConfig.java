@@ -98,6 +98,7 @@ public class SecurityConfig {
                 // CORS preflight
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
+                .requestMatchers("/user/health").permitAll()
                 .requestMatchers("/api/auth/**").permitAll()
 
                 // 공개 엔드포인트
