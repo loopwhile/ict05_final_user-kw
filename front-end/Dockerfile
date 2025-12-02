@@ -22,7 +22,7 @@ FROM nginx:stable-alpine
 COPY --from=build /app/nginx.conf /etc/nginx/conf.d/default.conf
 
 # 빌드된 정적 파일들을 Nginx의 웹 루트 디렉토리로 복사
-COPY --from=build /app/dist /usr/share/nginx/html
+COPY --from=build /app/build /usr/share/nginx/html
 
 # Nginx 포트
 EXPOSE 80
