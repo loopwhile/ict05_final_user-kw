@@ -10,8 +10,7 @@ import { toast } from "sonner";
 import "./index.css";
 import { requestFcmToken } from "./lib/firebase";
 
-const swPath =
-  (import.meta.env.MODE === 'production' ? '/user' : '') + '/firebase-messaging-sw.js';
+    const serviceWorkerUrl = '/firebase-messaging-sw.js';
 
 if ('serviceWorker' in navigator) {
   // 앱 시작 시 한 번만 등록
@@ -101,7 +100,7 @@ const basename = import.meta.env.MODE === 'production' ? '/user' : '/';
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <BrowserRouter basename={basename}>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />

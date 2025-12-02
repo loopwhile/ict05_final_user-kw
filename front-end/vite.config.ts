@@ -11,6 +11,7 @@ export default defineConfig(({ command, mode }) => {
       alias: { '@': path.resolve(__dirname, './src') },
     },
     build: { target: 'esnext', outDir: 'build' },
+    base: mode === 'android' ? './' : '/',   // ✅ 핵심
     server: {
       port: 3000,
       strictPort: true,
@@ -26,14 +27,6 @@ export default defineConfig(({ command, mode }) => {
       },
     },
   };
-
-  if (command === 'build' && mode !== 'android') {
-     // 웹 배포용 (Spring Boot static 폴더로 갈 때)
-     baseConfig.base = '/user/';
-  } else if (mode === 'android') {
-     // 앱 배포용 (Capacitor 내부용) -> 절대경로 '/' 또는 상대경로 './'
-     baseConfig.base = './'; 
-  }
 
   return baseConfig;
 });
