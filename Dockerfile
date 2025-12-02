@@ -11,7 +11,7 @@ COPY gradle ./gradle
 RUN chmod +x gradlew
 
 # 의존성을 먼저 다운로드 (이 단계는 build.gradle이 변경될 때만 실행됨)
-RUN ./gradlew dependencies
+RUN ./gradlew dependencies --no-daemon
 
 # 소스 코드 복사
 COPY src ./src
