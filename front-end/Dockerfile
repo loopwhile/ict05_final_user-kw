@@ -24,7 +24,11 @@ COPY --from=build /app/nginx.conf /etc/nginx/conf.d/default.conf
 # 빌드된 정적 파일들을 Nginx의 웹 루트 디렉토리로 복사
 COPY --from=build /app/build /usr/share/nginx/html
 
-# Nginx 포트
+# index.html에서 <base href="/user/"> 태그 제거 및 /user/assets/ 경로 수정
+RUN sed -i -e '/<base href="\/user\/">/d' \
+          -e 's|/user/assets/|/assets/|g' /usr/share/nginx/html/index.html
+
+# Nginx 포트트
 EXPOSE 80
 
 # Nginx 실행
