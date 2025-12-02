@@ -15,7 +15,7 @@ import { requestFcmToken } from "./lib/firebase";
 if ('serviceWorker' in navigator) {
   // 앱 시작 시 한 번만 등록
   navigator.serviceWorker
-    .register(swPath)
+    .register(serviceWorkerUrl)
     .then((reg) => console.log('[SW] registered:', reg.scope))
     .catch((err) => console.warn('[SW] register failed:', err));
 }
