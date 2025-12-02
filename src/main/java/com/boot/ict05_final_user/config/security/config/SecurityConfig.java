@@ -86,6 +86,24 @@ public class SecurityConfig {
 
     // 보안 필터 체인
     @Bean
+    @Order(0)
+    SecurityFilterChain healthChain(HttpSecurity http) throws Exception {
+        http
+            .securityMatcher(
+                "/health",
+                "/actuator/health",
+                "/actuator/health/**"
+            )
+            .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
+            .csrf(csrf -> csrf.disable())
+            .requestCache(c -> c.disable())
+            .securityContext(sc -> sc.disable())
+            .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        return http.build();
+    }
+
+    @Bean
+    @Order(1)
     public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtService jwtService, EmailAuthenticationProvider provider) throws Exception {
 
         http.csrf(AbstractHttpConfigurer::disable);
@@ -98,7 +116,7 @@ public class SecurityConfig {
                 // CORS preflight
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
-                .requestMatchers("/user/health").permitAll()
+                .requestMatchers("/health").permitAll()
                 .requestMatchers("/api/auth/**").permitAll()
 
                 // 공개 엔드포인트
