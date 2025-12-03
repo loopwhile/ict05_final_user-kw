@@ -11,7 +11,7 @@ export default defineConfig(({ command, mode }) => {
       alias: { '@': path.resolve(__dirname, './src') },
     },
     build: { target: 'esnext', outDir: 'build' },
-    base: mode === 'android' ? './' : '/',   // ✅ 핵심
+    base: mode === 'android' ? './' : '/user/',   // ✅ 핵심: 모든 웹 리소스 경로 앞에 '/user/'를 붙여줌
     server: {
       port: 3000,
       strictPort: true,
